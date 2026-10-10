@@ -59,6 +59,7 @@ model VerificationToken {
 model Post {   
   id        String   @id @default(cuid())
   title     String
+  desc      String   @db.Text
   content   String   @db.Text
   authorId  String
   createdAt DateTime @default(now())

@@ -1,6 +1,14 @@
 "use client"
+
+import { useState } from "react"
+import PostSection from "./PostSection"
+
 export default function AddPost() {
-      const handleCreatePost = async () => {
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [modalPost, setModalPost] = useState(false)
+
+      const handleCreatePost = async (title: string, desc: string) => {
         try {
           const res = await fetch("/api/post", {
             method: "POST",
@@ -8,8 +16,8 @@ export default function AddPost() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              title: "Mi título",
-              content: "Mi contenido",
+              title: title,
+              desc: desc,
             }),
           })
     
@@ -21,10 +29,12 @@ export default function AddPost() {
         }
       } 
     return (
-      <form action={async () => {
-        await handleCreatePost()
-      }}>
-        <button type="submit" className="bg-blue-600 flex justify-center items-center rounded-xl text-xl font-bold w-12 h-12">+</button>
-      </form>
+      // <form action={async () => {
+      //   await handleCreatePost()
+      // }}>
+        <button onClick={() => setModalPost(true)} className="bg-blue-600 flex justify-center items-center rounded-xl text-xl font-bold w-12 h-12">
+          {modalPost ? <PostSection modalPost={modalPost} setModalPost={setModalPost} HandleCreatePost={handleCreatePost}/> : "+"}
+        </button>
+      // </form>
     )
 }

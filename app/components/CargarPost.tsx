@@ -29,9 +29,9 @@ export default function CargarPost() {
                 <div key={post.id} className="flex flex-col gap-2 p-4 rounded-md w-full h-fit bg-white/10">
                     <div className="flex justify-between items-center gap-2">
                         <h2 className="font-bold text-lg">{post.title}</h2>
-                        <p className="text-sm text-gray-500">{post.author?.name}</p>
+                        <p className="text-sm text-gray-500">{post.author.name}</p>
                     </div>
-                    <p>{post.content}</p>
+                    <p>{post.desc}</p>
                 </div>
             ))}
         </div>

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "@/src/auth"
 import type { Session } from "next-auth"
 import { prisma } from "@/lib/prisma";
+import { Content } from "next/font/google";
 
 export async function POST(req: Request) {
   try {
@@ -15,11 +16,11 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json()
-    const { title, content } = body
+    const { title, desc } = body
 
-    if (!title || !content) {
+    if (!title || !desc) {
       return NextResponse.json(
-        { error: "Faltan campos obligatorios (title, content)" },
+        { error: "Faltan campos obligatorios (title, desc)" },
         { status: 400 }
       )
     }
@@ -27,7 +28,8 @@ export async function POST(req: Request) {
     const newPost = await prisma.post.create({
       data: {
         title : body.title,
-        content: body.content,
+        desc: body.desc,
+        content: "body.content",
         authorId: session.user.id,
       },
     })

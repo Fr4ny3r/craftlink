@@ -6,10 +6,18 @@ export interface Session {
 }
 
 export interface Post {
+  author: Author;
   id: string;
   title: string;
-  content: string;
+  desc: string;
   authorId: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface Author {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
 }
